@@ -6,7 +6,7 @@
 /*   By: rmaes <rmaes@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/03 18:23:28 by rmaes         #+#    #+#                 */
-/*   Updated: 2022/12/04 19:14:52 by rmaes         ########   odam.nl         */
+/*   Updated: 2022/12/04 19:54:15 by rmaes         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	handler(int sig, siginfo_t *siginfo, void *p)
 	{
 		ft_printf("%c", c);
 		if (c == '\0')
+		{
+			ft_printf("\n");
 			kill(pid, SIGUSR2);
+		}
 		c = 0;
 		i = 0;
 	}
