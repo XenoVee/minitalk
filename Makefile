@@ -6,7 +6,7 @@
 #    By: rmaes <rmaes@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/08/01 13:10:16 by rmaes         #+#    #+#                  #
-#    Updated: 2022/12/04 19:45:16 by rmaes         ########   odam.nl          #
+#    Updated: 2022/12/04 19:50:14 by rmaes         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,10 @@ $(NAME_CLIENT): $(OBJECTS_CLIENT) $(LIBFT)
 
 clean:
 	rm -f $(OBJECTS_SERVER) $(OBJECTS_CLIENT) 
+	make clean -C libftprintf
 
 fclean: clean
+	make fclean -C libftprintf
 	rm -f $(NAME_SERVER) $(NAME_CLIENT)
 
 re: fclean all
