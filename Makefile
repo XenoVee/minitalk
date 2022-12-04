@@ -6,36 +6,42 @@
 #    By: rmaes <rmaes@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/08/01 13:10:16 by rmaes         #+#    #+#                  #
-#    Updated: 2022/12/03 22:53:17 by rmaes         ########   odam.nl          #
+#    Updated: 2022/12/04 19:45:16 by rmaes         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES = client.c
-OBJECTS = $(SOURCES:.c=.o)
-HEADER = client.h
-LIBFT = ../libftprintf/libft.a
+SOURCES_SERVER = server_dir/server.c
+OBJECTS_SERVER = $(SOURCES_SERVER:.c=.o)
+
+SOURCES_CLIENT = client_dir/client.c
+OBJECTS_CLIENT = $(SOURCES_CLIENT:.c=.o)
+
+LIBFT = libftprintf/libft.a
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
-NAME = client
+NAME_SERVER = server
+NAME_CLIENT = client
 TEST = test
 
-all: $(NAME)
+all: $(NAME_SERVER) $(NAME_CLIENT)
 
-$(TEST): $(NAME)
-	$(CC) -g -o $@ $^
-	make clean
+$(LIBFT):
+	make -C libftprintf
 
-$(NAME): $(OBJECTS) $(LIBFT)
+$(NAME_SERVER): $(OBJECTS_SERVER) $(LIBFT)
+	$(CC) $^ -o $@
+
+$(NAME_CLIENT): $(OBJECTS_CLIENT) $(LIBFT)
 	$(CC) $^ -o $@
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $^
 
 clean:
-	rm -f $(OBJECTS) $(BONUS_OBJECTS)
+	rm -f $(OBJECTS_SERVER) $(OBJECTS_CLIENT) 
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME_SERVER) $(NAME_CLIENT)
 
 re: fclean all
 
